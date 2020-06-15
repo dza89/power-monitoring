@@ -34,8 +34,13 @@ services:
           - '9090:9090'
         image: prom/prometheus-linux-armv7:v2.19.0 
         volume:
-          - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+          - ./prometheus/:/etc/prometheus/
+          - prometheus_data:/prometheus
         depends_on:
           - esmr5
           - solar-scraper 
         restart: always
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
