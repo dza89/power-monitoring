@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+    esmr5:
+        container_name: esmr5
+        ports:
+            - '8000'
+        devices:
+            - /dev/ttyUSB0
+        image: 'sbkg0002/prometheus_esmr5:arm32v7-latest'
+        restart: always
+    solar-scraper:
+        container_name: solar-scraper
+        environment:
+            - ECUHOST=<your-ecu-host-or-ip>
+        ports:
+            - 3000
+        image: 'djryanj/solar-scraper:latest'
+        restart: always
+    grafana:
+        container_name: grafana
+        ports:
+            - '3000:3000'
+        image: grafana/grafana:7.0.3
+        depends_on:
+          - prometheus
+        restart: always
+        volumes:
+          - grafana_data:/var/lib/grafana
+          - ./grafana/provisioning/:/etc/grafana/provisioning/
+        env_file:
+          - ./grafana/config.monitoring
+    prometheus:
+        ports:
+          - '9090:9090'
+        image: prom/prometheus-linux-armv7:v2.19.0 
+        volume:
+          - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        depends_on:
+          - esmr5
+          - solar-scraper 
+        restart: always
