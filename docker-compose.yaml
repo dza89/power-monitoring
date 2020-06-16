@@ -14,7 +14,8 @@ services:
             - ECUHOST=<your-ecu-host-or-ip>
         ports:
             - 3000
-        image: 'djryanj/solar-scraper:latest'
+        # manual build from https://github.com/djryanj/solar-scraper.git
+        image: 'solar-scraper:latest'
         restart: always
     grafana:
         container_name: grafana
