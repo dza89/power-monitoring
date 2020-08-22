@@ -8,7 +8,7 @@ This repository is a simple docker configuration for scraping and visualising me
 
 ## Setup
 
-You need to connect your device to your smart meter using an USB-RJ11 FT232R cable. These are relatively easy to come by, just google brand + model and FT232R.
+You need to connect your device to your smart meter using an USB-RJ11 FT232R cable. These are relatively easy to come by, just google DSMR brand/model and FT232R.
 
 Set up different credentials if needed in grafana/config.monitoring.
 
