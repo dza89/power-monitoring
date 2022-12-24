@@ -1,8 +1,6 @@
 version: '3.3'
 services:
     esmr5:
-        ports:
-            - 8000:8000
         devices:
             - /dev/ttyUSB0
         image: 'sbkg0002/prometheus_esmr5:arm32v7-latest'
@@ -15,15 +13,15 @@ services:
         restart: always
         volumes:
           - grafana_data:/var/lib/grafana
-          - ./grafana/provisioning/:/etc/grafana/provisioning/
+          - ./config/grafana/provisioning/:/etc/grafana/provisioning/
         env_file:
-          - ./grafana/config.monitoring
+          - ./grafana/.env
     prometheus:
         ports:
           - '9090:9090'
         image: prom/prometheus:latest
         volumes:
-          - ./prometheus/:/etc/prometheus/
+          - ./config/prometheus/:/etc/prometheus/
           - prometheus_data:/prometheus
         restart: always
 
