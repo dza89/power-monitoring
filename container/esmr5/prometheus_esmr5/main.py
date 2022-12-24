@@ -7,7 +7,7 @@ import logging
 from smeterd.meter import SmartMeter
 
 
-# Define metrics
+# Definitions
 electricity_consumed_total = Gauge('electricity_consumed_total', 'Electricity consumption total year-to-date')
 electricity_consumed_low = Gauge('electricity_consumed_low', 'Electricity consumption tariff low year-to-date')
 electricity_consumed_high = Gauge('electricity_consumed_high', 'Electricity consumption tariff high year-to-date')

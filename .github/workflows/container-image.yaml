@@ -27,7 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}:esmr5"
+          context: "{{defaultContext}}:container/esmr5"
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/dza89/esmr5:latest
