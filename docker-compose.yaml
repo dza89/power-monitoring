@@ -1,21 +1,17 @@
 version: '3.3'
 services:
     esmr5:
-        container_name: esmr5
-        expose:
-            - 8000
+        ports:
+            - 8000:8000
         devices:
             - /dev/ttyUSB0
-        #image: 'sbkg0002/prometheus_esmr5:arm32v7-latest'
+        image: 'sbkg0002/prometheus_esmr5:arm32v7-latest'
         build: esmr5
         restart: always
     grafana:
-        container_name: grafana
         ports:
             - 3000:3000
-        image: grafana/grafana:7.1.1
-        depends_on:
-          - prometheus
+        image: grafana/grafana:latest
         restart: always
         volumes:
           - grafana_data:/var/lib/grafana
@@ -25,12 +21,10 @@ services:
     prometheus:
         ports:
           - '9090:9090'
-        image: prom/prometheus:v2.20.1
+        image: prom/prometheus:latest
         volumes:
           - ./prometheus/:/etc/prometheus/
           - prometheus_data:/prometheus
-        depends_on:
-          - esmr5
         restart: always
 
 volumes:
